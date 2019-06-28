@@ -8,7 +8,7 @@ tendermint的SDK中包含了构造一个区块链节点旳绝大部分组件，�
 
 ABCI是开发语言无关的，开发人员可以使用自己喜欢的任何语言来开发基于tendermint的 专用区块链。不过由于tendermint本身是采用go语言开发的，因此用go开发ABCI应用的一个额外好处就是，你可以把tendermint完整的嵌入自己的应用，干净利落地交付一个单一的可执行文件。
 
-![](resources\1.png)
+![](resources/1.png)
 
 ABCI 包含了 3 个主要的消息类型，它们由 core 发送至应用，应用会对消息产生相应的回复: 
 
@@ -45,13 +45,13 @@ type Application interface {
 
 很显然，在创建区块链时，应用的设计者需要非常小心地设计他们的消息处理，这个架构提供一个范例。下图阐释了通过 ABCI 的消息流： 
 
-![](resources\2.png)
+![](resources/2.png)
 
 ## 节点以及共识算法
 
 节点分两种：能生成区块的节点（validator）和不能生成区块的节点。不能生成区块的节点，主要的工作是广播节点/区块等信息以及投票。Tendermint使用的是POS+BFT算法，具体流程如下：
 
-![](resources\3.png)
+![](resources/3.png)
 
 协议中的参与者叫着 “验证人”（validator）。他们轮流对交易区块进行提议，并对这些区块进行投票。区块会被提交到链上，每一个块占据一个“高度”（height）。提交块可能会失败，如果失败，协议就会开始下一轮的提交，并且一个新的验证人会继续提交那个高度的区块。要想成功提交一个块，需要有两个阶段的投票：“预投票”（pre-vote）和“预提交”（pre-commit）。在同一轮提交中，只有超过 2/3 的验证人对同一个块进行了预提交，这个块才能被提交到链上。 
 
@@ -87,7 +87,7 @@ https://github.com/tendermint/tendermint/tree/master/docs/spec/p2p
 
 ## Tendermint vs. Ontology
 
-![](resources\4.png)
+![](resources/4.png)
 
 在上图中，tendermint结构中的abci应用和ontology结构中的智能合约，都是由用户代码实现的。 显然，ABCI应用大致与NeoVM+合约的组合相匹配。
 
@@ -183,7 +183,7 @@ type Keeper struct {
 
 Setter和Getter：
 
-![](resources\5.png)
+![](resources/5.png)
 
 ### Msg和Handler
 
@@ -318,10 +318,10 @@ func handleMsgBuyName(ctx sdk.Context, keeper Keeper, msg MsgBuyName) sdk.Result
 
 ## 其他
 
-![](resources\6.png)
+![](resources/6.png)
 
 开发者新建模块需要完成的所有文件。
 
 ## Cosmos vs. Ontology
 
-![](resources\7.png)
+![](resources/7.png)
